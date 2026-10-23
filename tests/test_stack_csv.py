@@ -22,6 +22,7 @@ def load_rows():
     return rows
 
 
+@pytest.mark.csv
 @pytest.mark.parametrize("limit,pushes,expected_size,expected_full", load_rows())
 def test_stack_size_and_full_from_csv(limit, pushes, expected_size, expected_full):
     s = Stack(limit)

@@ -335,6 +335,9 @@ ini_options.addopts = [
 ]
 ini_options.markers = [
   "mat_ops: mark a test as utilizing matrix operations.",
+    "smoke: quick basic tests",
+    "boundary: boundary value tests",
+    "csv: data driven tests from csv",
 ]
 
 [tool.coverage]

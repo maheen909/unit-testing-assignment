@@ -6,6 +6,8 @@ from data_structures.stacks.stack import (
 )
 
 
+@pytest.mark.order(1)
+@pytest.mark.smoke
 def test_push_adds_element():
     s = Stack(3)
     s.push(10)
@@ -20,6 +22,7 @@ def test_push_until_full_boundary():
     assert s.is_full()
 
 
+@pytest.mark.boundary
 def test_push_beyond_limit_raises_overflow():
     s = Stack(2)
     s.push(1)
@@ -35,6 +38,7 @@ def test_push_limit_one_boundary():
         s.push("b")
 
 
+@pytest.mark.boundary
 def test_push_limit_zero_always_overflow():
     s = Stack(0)
     with pytest.raises(StackOverflowError):
@@ -48,6 +52,7 @@ def test_push_accepts_different_types(value):
     assert s.peek() == value
 
 
+@pytest.mark.order(2)
 def test_pop_returns_top_element():
     s = Stack()
     s.push(-5)
@@ -160,6 +165,7 @@ def test_is_full_one_below_limit():
     assert s.is_full() is False
 
 
+@pytest.mark.boundary
 def test_is_full_at_limit():
     s = Stack(3)
     for i in range(3):
