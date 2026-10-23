@@ -1,0 +1,9 @@
+tc_id,capacity,operations,expected_output,expected_size,technique
+TC01,3,enq:A;enq:B;deq,A,1,Normal flow (ECP valid)
+TC02,2,enq:A;enq:B;enq:C,ERR:QUEUE IS FULL,2,BVA (capacity + 1)
+TC03,2,deq,ERR:UNDERFLOW,0,BVA (empty queue dequeue)
+TC04,3,enq:A;first,A,1,ECP valid (first on non-empty)
+TC05,3,first,False,0,ECP (first on empty)
+TC06,2,enq:A;enq:B;deq;enq:C;deq,B,1,Wrap-around (circular behaviour)
+TC07,1,enq:X;enq:Y,ERR:QUEUE IS FULL,1,BVA (capacity = 1)
+TC08,0,enq:A,ERR:QUEUE IS FULL,0,BVA (capacity = 0)
