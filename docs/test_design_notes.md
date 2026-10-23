@@ -1,43 +1,35 @@
 # Test Design Notes - Module 1: Stack
-File: data_structures/stacks/stack.py | Class: Stack
+
+File tested: data_structures/stacks/stack.py (class Stack, default limit 10)
 Test file: tests/test_stack.py
 
 ## push(data)
-ECP:
-- Valid: stack me jagah hai (size < limit) -> element add hota hai
-- Invalid: stack full (size == limit) -> StackOverflowError
-- Data types: int, str, None, list, float (generic stack, sab valid)
-BVA (limit = 3):
-- size 0 (min): push OK
-- size limit-1 (2): push OK, stack full ho jata hai
-- size limit (3): push -> StackOverflowError
-- limit = 1 aur limit = 0 (extreme boundary)
+- Valid class: stack has room (size < limit), element gets added.
+- Invalid class: stack is full (size == limit), raises StackOverflowError.
+- Data types: int, str, None, list, float all work since the stack is generic.
+- Boundaries (limit = 3): push at size 0, at size 2 (becomes full), at size 3 (error). Also limit 1 and limit 0.
 
 ## pop()
-ECP:
-- Valid: non-empty stack -> top element wapas, size 1 kam
-- Invalid: empty stack -> StackUnderflowError
-BVA:
-- size 1 par pop -> stack empty ho jata hai
-- size 0 par pop -> StackUnderflowError
-- LIFO order check
+- Valid class: non-empty stack returns top element, size goes down by 1.
+- Invalid class: empty stack raises StackUnderflowError.
+- Boundaries: size 1 (becomes empty), size 0 (error). Checked LIFO order with 3 elements.
 
 ## peek()
-ECP: non-empty -> top element (hataya nahi jata); empty -> StackUnderflowError
-BVA: size 1, size 0, full stack (size == limit)
+- Non-empty: returns top without removing it.
+- Empty: raises StackUnderflowError.
+- Boundaries: size 1, size 0, full stack.
 
-## is_empty() / is_full() / size()
-ECP: empty, partially filled, full
-BVA: size 0, 1, limit-1, limit
-Extra: Stack(0).is_full() == True (0 == 0); pop ke baad full stack full nahi rehta;
-failed push/pop se size change nahi hoti
+## is_empty(), is_full(), size()
+- Classes: empty, partly filled, full.
+- Boundaries: size 0, 1, limit-1, limit.
+- Extra checks: Stack(0).is_full() is True because 0 == 0. A full stack is not full after pop. A failed push or pop does not change the size.
 
 ## __contains__(item)
-ECP: item maujood, item absent, empty stack me search
-BVA: sirf top element, sirf bottom element
-Extra: string aur None search
+- Classes: item present, item missing, empty stack.
+- Boundaries: item at the bottom, item at the top.
+- Extra: searching for a string and for None.
 
-## Class-level tests
-- Push/pop ka poora workflow, LIFO order
-- limit=0 jaisi extreme configuration
-- __bool__ aur __str__ ka state ke saath sahi hona
+## Whole class
+- Fill the stack, try overflow, empty it, try underflow.
+- limit = 0 edge case.
+- __bool__ and __str__ match the stack state.

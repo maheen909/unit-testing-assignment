@@ -6,7 +6,6 @@ from data_structures.stacks.stack import (
 )
 
 
-# ---------- push() ----------
 def test_push_adds_element():
     s = Stack(3)
     s.push(10)
@@ -49,7 +48,6 @@ def test_push_accepts_different_types(value):
     assert s.peek() == value
 
 
-# ---------- pop() ----------
 def test_pop_returns_top_element():
     s = Stack()
     s.push(-5)
@@ -84,7 +82,6 @@ def test_pop_decreases_size():
     assert s.size() == 1
 
 
-# ---------- peek() ----------
 def test_peek_returns_top_without_removing():
     s = Stack()
     s.push(7)
@@ -104,7 +101,6 @@ def test_peek_on_full_stack():
     assert s.peek() == 2
 
 
-# ---------- class-level ----------
 def test_new_stack_state():
     s = Stack()
     assert bool(s) is False
@@ -134,7 +130,8 @@ def test_full_workflow_fill_and_empty():
     assert s.is_empty()
     with pytest.raises(StackUnderflowError):
         s.pop()
-        # ---------- is_empty() ----------
+
+
 def test_is_empty_on_new_stack():
     assert Stack().is_empty() is True
 
@@ -152,7 +149,6 @@ def test_is_empty_after_push_and_pop():
     assert s.is_empty() is True
 
 
-# ---------- is_full() ----------
 def test_is_full_on_new_stack():
     assert Stack(3).is_full() is False
 
@@ -161,17 +157,16 @@ def test_is_full_one_below_limit():
     s = Stack(3)
     s.push(1)
     s.push(2)
-    assert s.is_full() is False   # limit-1 boundary
+    assert s.is_full() is False
 
 
 def test_is_full_at_limit():
     s = Stack(3)
     for i in range(3):
         s.push(i)
-    assert s.is_full() is True    # limit boundary
+    assert s.is_full() is True
 
 
-# ---------- size() ----------
 @pytest.mark.parametrize("count", [0, 1, 5, 10])
 def test_size_after_n_pushes(count):
     s = Stack(10)
@@ -188,7 +183,6 @@ def test_size_after_pop():
     assert s.size() == 1
 
 
-# ---------- __contains__ ----------
 def test_contains_existing_item():
     s = Stack()
     s.push(10)
@@ -209,16 +203,14 @@ def test_contains_bottom_and_top_elements():
     s = Stack()
     for i in [1, 2, 3]:
         s.push(i)
-    assert 1 in s    # bottom
-    assert 3 in s    # top
-    # ---------- extra tests (apne likhe hue) ----------
+    assert 1 in s
+    assert 3 in s
 
-# is_full(): limit 0 par stack shuru se hi full hai (0 == 0)
+
 def test_is_full_with_zero_limit():
     assert Stack(0).is_full() is True
 
 
-# is_full(): pop karne ke baad full stack dobara full nahi rehta
 def test_is_full_false_after_pop_from_full_stack():
     s = Stack(2)
     s.push(1)
@@ -227,7 +219,6 @@ def test_is_full_false_after_pop_from_full_stack():
     assert s.is_full() is False
 
 
-# size(): overflow ke baad size nahi badhti
 def test_size_unchanged_after_failed_push():
     s = Stack(1)
     s.push(1)
@@ -236,7 +227,6 @@ def test_size_unchanged_after_failed_push():
     assert s.size() == 1
 
 
-# size(): khali stack par pop fail ho to size 0 hi rehti hai
 def test_size_zero_after_failed_pop():
     s = Stack()
     with pytest.raises(StackUnderflowError):
@@ -244,7 +234,6 @@ def test_size_zero_after_failed_pop():
     assert s.size() == 0
 
 
-# __contains__(): string search
 def test_contains_string_item():
     s = Stack()
     s.push("hello")
@@ -252,7 +241,6 @@ def test_contains_string_item():
     assert "world" not in s
 
 
-# __contains__(): None bhi ek valid item hai
 def test_contains_none_item():
     s = Stack()
     s.push(None)
