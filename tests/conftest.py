@@ -1,10 +1,3 @@
-"""Registers the pytest markers used by test_circular_queue.py.
-
-Markers are added here so they work with the repository's existing pytest
-configuration and do not clash with the markers used for the stack tests.
-"""
-
-
 def pytest_configure(config):
     for marker in (
         "function: tests for a single method",
@@ -14,6 +7,7 @@ def pytest_configure(config):
         "dequeue: dequeue tests",
         "first: first tests",
         "state: is_empty and __len__ tests",
+        "tail: insert_tail and delete_tail tests",
         "boundary: boundary value analysis tests",
         "csv: data-driven tests that read a CSV file",
     ):

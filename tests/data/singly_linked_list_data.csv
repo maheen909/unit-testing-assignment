@@ -1,0 +1,7 @@
+tc_id,operations,expected_output,expected_size
+TC-SLL-01,in_h:A;in_h:B;del_h,B,1
+TC-SLL-02,in_t:A;in_t:B;del_t,B,1
+TC-SLL-03,del_h,ERR:List is empty,0
+TC-SLL-04,del_t,ERR:List is empty,0
+TC-SLL-05,in_h:X;in_t:Y;del_h,X,1
+TC-SLL-06,in_h:X;in_t:Y;del_t,Y,1
